@@ -8,6 +8,14 @@ slug: /router
 Router is a plugin that enables developers to build a single page application with multiple components that acts as different views of the app.
 View changes depending on the activated route. Activated routes depends on the url of the browser and the path registered in the router.
 
+## Installation
+
+Router plugin can be installed using the following command:
+
+```bash
+npm install munster-router
+```
+
 ## Register the plugin
 
 Router must be registered as a plugin first before we can use it.

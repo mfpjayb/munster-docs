@@ -8,6 +8,14 @@ slug: /store
 Store is a plugin and a state management built for munster framework.
 It is accessible inside a component using `this.$store`.
 
+## Installation
+
+Store plugin can be installed using the following command:
+
+```bash
+npm install munster-store
+```
+
 ## Register the plugin
 
 Store needs to be registered in a module before we can use it.
@@ -43,7 +51,7 @@ const store = {
 
 new Global({
     plugins: [
-        Store.config(state)
+        Store.config(store)
     ]
 });
 ```
@@ -78,7 +86,7 @@ Here's an example on how to get a value of the store:
 </template>
 
 export default class SampleComponent {
-    $onInit() {
+    connectedCallback() {
         this.random = this.$store.random.value();
     }
 }
@@ -96,7 +104,7 @@ Here's how to watch the data changes for each item in the state:
 </template>
 
 export default class SampleComponent {
-    $onInit() {
+    connectedCallback() {
         this.$store.random.watch(this.onRandomChanges.bind(this));
     }
 

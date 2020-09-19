@@ -7,6 +7,14 @@ slug: /navigate
 
 Navigate allows us to redirect to a route programmatically.
 
+## Installation
+
+Navigate plugin can be installed using the following command:
+
+```bash
+npm install munster-navigate
+```
+
 ## Register the plugin
 
 Navigate plugin needs to be registered in a module before we can use it.
@@ -14,17 +22,17 @@ Navigate plugin needs to be registered in a module before we can use it.
 Here's an example on how to register this plugin:
 
 ```javascript
-import { Module, Navigate } from 'munster';
+import { Global } from 'munster';
+import Navigate from 'munster-navigate';
 
-const module = new Module({
-    ...
+new Global({
+    plugins: [
+        Navigate
+    ]
 });
-
-module.plugin(Navigate);
-...
 ```
 
-## Programmatically navigate
+## Navigate programmatically
 
 Here's an example on how to navigate to a route programmatically:
 
@@ -35,7 +43,6 @@ Here's an example on how to navigate to a route programmatically:
 
 export default class SampleComponent {
     btnClick() {
-        ...
         this.$navigate('/route/path');
     }
 }

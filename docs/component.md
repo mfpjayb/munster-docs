@@ -8,6 +8,10 @@ slug: /component
 Components are the most basic building block of an application.
 Currently it is composed of view and logic but in the future releases a scoped style will be added to component's features.
 
+:::note
+Component must use `export default` in exporting the component.
+:::
+
 ## Structure
 
 Component is composed of view and logic.
