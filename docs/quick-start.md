@@ -41,13 +41,13 @@ After the setup is complete, you can see the file structure of project in the cu
 index.html
 └── src/
     ├── main.js
-    ├── AppRoot.js
+    ├── Root.js
     └── assets/
 node_modules/
 package.json
 ```
 * `index.html` as the main HTML page that is served when someone visits the site.
-* `src/AppRoot.js` the root component. Any other components must be a child of this component.
+* `src/Root.js` the root component. Any other components must be a child of this component.
 * `src/main.js` the main entry point of your application. It bootstrap the root module of the entire project.
 * `src/assets` this is the recommended directory to put all of the asset files.
 * `package.json` list all the dependencies and configurations of your project.

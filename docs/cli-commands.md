@@ -9,9 +9,9 @@ Here is a list of available commands for munster cli:
 
 | Command | Syntax | Description |
 | --- | --- | --- |
-| new | `vm new <project_name>` | Generate a new munster application. |
-| serve | `vm serve` | Serve the application locally for development. |
-| generate| `vm generate <type> <name>` | Generate a munster file based on the given type and name. See [generate types](/docs/cli-commands#generate-types) section for more info. |
+| new | `mun new <project_name>` | Generate a new munster application. |
+| serve | `mun serve` | Serve the application locally for development. |
+| generate| `mun generate <type> <name>` | Generate a munster file based on the given type and name. See [generate types](/docs/cli-commands#generate-types) section for more info. |
 
 ## Generate types
 
@@ -25,7 +25,7 @@ Here's a list of available types for the generate command:
 Here's an example on how to use the generate command:
 
 ```bash
-vm generate component Sidebar
+mun generate component Sidebar
 ```
 
 This will generate a component file in `src/Sidebar.js`.

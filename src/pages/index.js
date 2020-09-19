@@ -10,6 +10,7 @@ const features = [
   {
     title: 'Easy to Use',
     // imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    imageUrl: 'img/munster.svg',
     description: (
       <>
         This framework is built to be simple, easy to understand and easy to use.
@@ -19,6 +20,7 @@ const features = [
   {
     title: 'Component-Based',
     // imageUrl: 'img/undraw_docusaurus_tree.svg',
+    imageUrl: 'img/munster3.svg',
     description: (
       <>
         Build small components that manage their own state as a building blocks to build larger applications.
@@ -28,6 +30,7 @@ const features = [
   {
     title: 'Web Components',
     // imageUrl: 'img/undraw_docusaurus_react.svg',
+    imageUrl: 'img/munster4.svg',
     description: (
       <>
         It is based on web components for encapsulating components.
@@ -42,8 +45,8 @@ function Feature({imageUrl, title, description}) {
   return (
     <div className={clsx('col col--4', styles.feature)}>
       {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
+        <div className="text--center" style={{marginBottom: '40px'}}>
+          <img className={styles.featureImage} style={{width: '160px'}} src={imgUrl} alt={title} />
         </div>
       )}
       <h3>{title}</h3>
@@ -59,7 +62,7 @@ function Sponsors() {
         <h3 style={{textAlign: 'center', color: '#1c1e21cc'}}>Patreon Sponsors</h3>
         <h3 style={{textAlign: 'center', color: '#ccc'}}>. . .</h3>
         <div style={{textAlign: 'center'}}>
-          <button class="button button--outline button--secondary sponsor-link-btn">Become a sponsor</button>
+          <button className="button button--outline button--secondary sponsor-link-btn">Become a sponsor</button>
         </div>
       </div>
     </section>

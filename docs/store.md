@@ -5,25 +5,24 @@ sidebar_label: Store
 slug: /store
 ---
 
-Store is a plugin and a state management built for `munster`.
+Store is a plugin and a state management built for munster framework.
 It is accessible inside a component using `this.$store`.
 
 ## Register the plugin
 
 Store needs to be registered in a module before we can use it.
 
-Here's an example on how to register the store in a module:
+Here's an example on how to register the store:
 
 ```javascript
-import { Module } from 'munster';
+import { Globe } from 'munster';
 import Store from 'munster-store';
 
-const module = new Module({
-    ...
+new Global({
+    plugins: [
+        Store.config({})
+    ]
 });
-
-module.plugin(Store, {});   // <------ Register the store
-...
 ```
 
 ## Initial state
@@ -33,14 +32,20 @@ Initial state of the store is the state that is passed to the store as the initi
 Here's an example on how to create an initial state:
 
 ```javascript
+import { Globe } from 'munster';
+import Store from 'munster-store';
+
 const store = {
     state: {
         random: 0
     }
 };
 
-module.plugin(Store, store);
-...
+new Global({
+    plugins: [
+        Store.config(state)
+    ]
+});
 ```
 
 ## Setter
@@ -79,7 +84,7 @@ export default class SampleComponent {
 }
 ```
 
-## Watching store data changes
+## Watchers
 
 Store also offers a way to watch for the changes of each item of the state.
 
@@ -104,3 +109,46 @@ export default class SampleComponent {
 :::note
 Watchers are automatically un-watch when the component is destroyed.
 :::
+
+## Actions
+
+Actions can also be used to update the state.
+
+#### Create actions
+
+Here's an example on how to create an action:
+
+```javascript
+import { Globe } from 'munster';
+import Store from 'munster-store';
+
+const store = {
+    state: {
+        random: 0
+    },
+    actions: {
+        random: {
+            setRandom(current, payload) => {
+                return payload;
+            }
+        }
+    }
+};
+
+new Global({
+    plugins: [
+        Store.config(state)
+    ]
+});
+```
+#### Dispatch an action
+
+Here's an example on how to dispatch the created action above:
+
+```javascript
+export default class SampleComponent {
+    btnClick() {
+        this.$store.random.dispatch('setRandom', Math.random());
+    }
+}
+```

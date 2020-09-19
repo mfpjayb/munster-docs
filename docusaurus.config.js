@@ -12,7 +12,8 @@ module.exports = {
       title: 'Munster',
       logo: {
         alt: 'Munster logo',
-        src: 'img/logo.svg'
+        // src: 'img/logo.svg'
+        src: 'img/munster.svg'
       },
       items: [
         {
@@ -83,8 +84,5 @@ module.exports = {
         },
       },
     ],
-  ],
-  // scripts: [
-  //   'js/custom.js'
-  // ]
+  ]
 };

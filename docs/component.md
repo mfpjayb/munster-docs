@@ -29,8 +29,10 @@ export default class SampleComponent {
 
 ## Component selector
 
-Component selector is based on the class name of the component converted into kebab case.
-If the class name of a component is `AppRoot` the selector will be `app-root` and now we can mount to the template using `<app-root />` tag.
+#### Component in global instance
+
+Component selector is based on the class name of the component converted into kebab case with a prefix of `app-` if the component is registered in the global instance.
+If the class name of a component is `SampleComponent` the selector will be `app-sample-component` and now we can mount the component to the dom using `<app-sample-component />` tag.
 
 Selector can also be customized inside the component using the `$selector` property.
 
@@ -43,9 +45,49 @@ Here's an example on how to add customize the component's selector:
 
 export default class SampleComponent {
     constructor() {
-        this.$selector = 'custom-component';
+        this.$selector = 'custom-selector';
     }
 }
+```
+
+## Define component
+
+#### Register component as global
+
+```javascript
+import { Global } from 'munster';
+import SampleComponent from './SampleComponent';
+
+new Global({
+    components: [
+        SampleComponent
+    ]
+});
+```
+#### Register component in a module
+
+```javascript
+import { Module } from 'munster';
+import SampleComponent from './SampleComponent';
+
+new Module({
+    components: [
+        SampleComponent
+    ]
+});
+```
+
+#### Normally define a component
+
+Component can also be defined using `customElements.define` since a component is a web component.
+It is recommended to define the component inside the `src/main.js` file.
+
+Here's how to define a web component:
+
+```javascript
+import SampleComponent from './SampleComponent';
+
+customElements.define('sample-component', SampleComponent);
 ```
 
 :::note
@@ -93,8 +135,6 @@ export default class SampleComponent {
 
 ## Event binding
 
-#### Event binding
-
 Event binding is a way to attach an event into an element.
 
 Here's an example on how to attach a click event to a button:
@@ -121,13 +161,13 @@ Below are the available lifecycle hooks:
 
 | Hooks                 | |
 | ---                   | --- |
-| $connected()                                  | Fired when the component is added to the dom. The same as web component's `connectedCallback` hook. |
-| $disconnected()                               | Fired when the component is removed from the dom. The same as web component's `disconnectedCallback` hook. |
-| $attributeChanged(attrName, oldVal, newVal)   | Fired when a component attribute is changed. The same as web component's `attributeChangedCallback` hook. |
-| $adopted()                                    | Fired when the component is moved from one HTML document to another one with the `adoptNode` method. The same as web component's `adoptedCallback` hook. |
-| $onViewInit()                                 | Fired when a component starts building the element of view. |
-| $afterViewInit()                              | Fired when a component is done building the element of view. |
-| $onChange()                                   | Fired when a the change detection in component is triggered. |
+| connectedCallback()                                   | Fired when the component is added to the dom. |
+| disconnectedCallback()                                | Fired when the component is removed from the dom. |
+| attributeChangedCallback(attrName, oldVal, newVal)    | Fired when a component attribute is changed. |
+| adoptedCallback()                                     | Fired when the component is moved from one HTML document to another one with the `adoptNode` method. |
+| onViewInit()                                          | Fired when a component starts building the element of view. |
+| afterViewInit()                                       | Fired when a component is done building the element of view. |
+| onChange()                                            | Fired when a the change detection in component is triggered. |
 
 ## Conditional rendering
 
@@ -242,27 +282,6 @@ export default class SampleComponent {
 Child component must be registered as a global component or as a module component.
 :::
 
-#### Register component as global
-
-```javascript
-import { Global } from 'munster';
-import SampleComponent from './SampleComponent';
-
-Global.component(SampleComponent);
-```
-#### Register component in a module
-
-```javascript
-import { Module } from 'munster';
-import SampleComponent from './SampleComponent';
-
-new Module({
-    components: [
-        SampleComponent
-    ]
-});
-```
-
 ## Props
 
 Props are properties passed down from the parent component to child component.
@@ -308,6 +327,7 @@ export default class ChildComponent {
 `observedAttributes` is required if we want to watch for the changes of an attribute.
 :::
 
+<!--
 ## Custom Directives
 
 Custom directive let's us create our own directive that can be used inside our views.
@@ -410,23 +430,44 @@ export default class App {
     }
 }
 ```
+-->
 
-## View content
+## Shadow dom
 
-View content let's us display content from the parent component into the child component's view.
+Shadow dom is used to encapsulate the component to prevent scripts and styles outside the component from affecting it.
 
-Here's an example on how to use view content:
+To use shadow dom in a component, we need to set the `$shadowMode` property of the component to 'open' or 'closed' and a shadow dom will be attached to the component.
 
-#### Parent component
+Here's an example on how to use shadow dom in a component:
+
+```javascript
+<template>
+    ...
+</template>
+
+export default class SampleComponent {
+    constructor() {
+        this.$shadowMode = 'open';
+    }
+}
+```
+
+## Slots
+
+Slots let's us display content from the parent component into the child component's view.
+Slots only work properly inside a shadow dom component.
+
+Here's an example on how to use slots:
+
+##### Parent component
 
 ```javascript
 // ./ParentComponent.js
-import ChildComponent from './ChildComponent';
 
 <template>
     <div>
         <child-component>
-            <h1>I am the view content.</h1>
+            <h1>I will be displayed on the child component slot.</h1>
         </child-component>
     </div>
 </template>
@@ -434,20 +475,62 @@ import ChildComponent from './ChildComponent';
 export default class ParentComponent {}
 ```
 
-#### Child component
+##### Child component
 
 ```javascript
 // ./ChildComponent.js
 
 <template>
-    <view-content></view-content>
+    <slot></slot>
 </template>
 
 export default class ChildComponent {}
 ```
 In the example above,
-the `<h1>I am the view content.</h1>` element which is inside the `<child-component>...</child-component>`
-component tags will be displayed in the child component's view where the `<view-content></view-content>` tag is located.
+the `<h1>I will be displayed on the child component slot.</h1>` element which is inside the `<child-component>...</child-component>`
+component tags will be displayed in the child component's view where the `<slot></slot>` tag is located.
+
+## Named slot
+
+Named slot let's us display multiple elements from parent component to child component.
+
+Here's an example on how to use named slots:
+
+##### Parent component
+
+```javascript
+// ./ParentComponent.js
+
+<template>
+    <div>
+        <child-component>
+            <h1 slot="first-slot">First named slot.</h1>
+            <h1 slot="second-slot">Second named slot.</h1>
+        </child-component>
+    </div>
+</template>
+
+export default class ParentComponent {}
+```
+
+##### Child component
+
+```javascript
+// ./ChildComponent.js
+
+<template>
+    <div>
+        <div>
+            <slot name="first-slot"></slot>
+        </div>
+        <slot name="second-slot"></slot>
+    </div>
+</template>
+
+export default class ChildComponent {}
+```
+
+
 
 
 

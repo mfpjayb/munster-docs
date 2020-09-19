@@ -17,17 +17,17 @@ npm install -g munster-cli
 After installing the cli, we can verify if the installation is a success by running the following command:
 
 ```bash
-vm --version
+mun --version
 ```
 
 If the installation is a success it should display the version of the munster-cli installed in your machine.
 
-We can find help with the cli using the `vm --help` command.
+We can find help with the cli using the `mun --help` command.
 
 We can now start creating our new munster project by running this command:
 
 ```bash
-vm new my-app
+mun new my-app
 ```
 
-The syntax of the command above is `vm <command> <project name>` where "new" is the command and "my-app" is the project name.
+The syntax of the command above is `mun <command> <project name>` where "new" is the command and "my-app" is the project name.

@@ -5,14 +5,14 @@ module.exports = {
       'quick-start.md',
     ],
     MainConcept: [
-      'module.md',
+      'global.md',
       'component.md',
       'router.md',
       'store.md'
     ],
     AvailablePlugins: [
-      'router.md',
       'navigate.md',
+      'router.md',
       'store.md'
     ],
     CLI: [

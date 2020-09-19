@@ -6,27 +6,28 @@ slug: /router
 ---
 
 Router is a plugin that enables developers to build a single page application with multiple components that acts as different views of the app.
-Vies changes depending on the activated route. Activated routes depends on the url of the browser.
+View changes depending on the activated route. Activated routes depends on the url of the browser and the path registered in the router.
 
 ## Register the plugin
 
-Router must be registered as a plugin to the module first before we can use it.
+Router must be registered as a plugin first before we can use it.
 
 Here's an example on how to register the router:
 
 ```javascript
-import { Module } from 'munster';
+import { Global } from 'munster';
 import Router from 'munster-router';
+import SampleComponent from './SampleComponent';
 
-const routes = [];              // <------ list of routes
+const routes = [
+    { path: '/sample-route', component: SampleComponent }
+];
 
-const module = new Module({
-    ...
+new Global({
+    plugins: [
+        Router.routes(routes)
+    ]
 });
-
-module.plugin(Router, routes);  // <------ registering the router
-
-module.mount('#app', true);
 ```
 
 ## Creating routes
@@ -44,25 +45,18 @@ A route is just a javascript object that contains two required properties, `path
 Here's an example on how to create routes
 
 ```javascript
-import { Module } from 'munster';
+import { Global } from 'munster';
 import Router from 'munster-router';
 import SampleComponent from './SampleComponent';
+import ChildRoute from './ChildRoute';
 
-const routes = [                // <------ list of routes
+const routes = [
     {
-        path: '/sample-route', component: SampleComponent, children: [
-            { path: '/sample-route/child-route', component: ChildRouteComponent }
+        path: '/route', component: SampleComponent, children: [
+            { path: '/route/child', component: ChildRoute }
         ]
     }
 ];
-
-const module = new Module({
-    ...
-});
-
-module.plugin(Router, routes);  // <------ registering the router
-
-module.mount('#app', true);
 ```
 
 ## Dynamic route matching
@@ -81,18 +75,16 @@ Here's a table of dynamic routes and its corresponding values in `this.$router.p
 
 ## Router outlet
 
-Router outlet is where the activated component is located after activation. Router outlet is written as `<app-router-outlet />` in the view.
+Router outlet is where the activated component is located after activation. Router outlet is written as `<plug-router-outlet />` in the view.
 
 Here's an example on how to implement the router outlet:
 
-```javascript
+```html
 <template>
     <div>
-        <app-router-outlet /> // Router outlet
+        <plug-router-outlet />
     </div>
 </template>
-
-export default class SampleComponent {}
 ```
 
 ## Router link
@@ -104,7 +96,7 @@ Here's an example on how to add a router link:
 
 ```jsx
 <template>
-    <app-link href="/route-path">I am a link</app-link>
+    <plug-link href="/route-path">I am a link</plug-link>
 </template>
 ```
 
@@ -125,11 +117,10 @@ Here's an example on how to use middleware:
 // ./AppModule.js
 ...
 import SampleMiddleware from './SampleMiddleware';
-
 const routes = [
     {
         path: '/sample-route', component: SampleComponent,
-        middleware: [SampleMiddleware]      // <---------- Middleware
+        middleware: [SampleMiddleware]
     }
 ];
 ...
@@ -137,7 +128,6 @@ const routes = [
 
 ```javascript
 // ./SampleMiddleware.js
-
 export default class SampleMiddleware {
     canActivate() {
         ...
