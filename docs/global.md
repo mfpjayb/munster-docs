@@ -42,6 +42,27 @@ Here's an example on how to mount the `SampleComponent` registered in the global
 <app-sample-component></app-sample-component>
 ```
 
+## Component prefix
+
+There is also an option to set a prefix to a registered components in global instance.
+The default prefix is `app`.
+
+Here's an example on how to use prefix in global instance:
+
+```javascript
+import { Global } from 'munster-modules';
+import Root from './Root';
+
+new Global({
+    prefix: 'custom',
+    components: [
+        Root
+    ]
+});
+```
+
+Now we can display the `Root` component using `<custom-root></custom-root>` tag.
+
 ## Use a plugin
 
 Plugins can be registered in the global instance by passing the plugin to the `plugins` array.
