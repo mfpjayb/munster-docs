@@ -6,7 +6,8 @@ module.exports = {
     ],
     'Main Concept': [
       'global.md',
-      'component.md'
+      'component.md',
+      'change-detection.md'
     ],
     'Available Plugins': [
       'navigate.md',
