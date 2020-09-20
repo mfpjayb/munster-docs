@@ -23,7 +23,7 @@ Store needs to be registered in a module before we can use it.
 Here's an example on how to register the store:
 
 ```javascript
-import { Globe } from 'munster';
+import { Global } from 'munster-modules';
 import Store from 'munster-store';
 
 new Global({
@@ -40,7 +40,7 @@ Initial state of the store is the state that is passed to the store as the initi
 Here's an example on how to create an initial state:
 
 ```javascript
-import { Globe } from 'munster';
+import { Global } from 'munster-modules';
 import Store from 'munster-store';
 
 const store = {
@@ -127,7 +127,7 @@ Actions can also be used to update the state.
 Here's an example on how to create an action:
 
 ```javascript
-import { Globe } from 'munster';
+import { Global } from 'munster-modules';
 import Store from 'munster-store';
 
 const store = {

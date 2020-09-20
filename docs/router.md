@@ -23,7 +23,7 @@ Router must be registered as a plugin first before we can use it.
 Here's an example on how to register the router:
 
 ```javascript
-import { Global } from 'munster';
+import { Global } from 'munster-modules';
 import Router from 'munster-router';
 import SampleComponent from './SampleComponent';
 
@@ -53,7 +53,7 @@ A route is just a javascript object that contains two required properties, `path
 Here's an example on how to create routes
 
 ```javascript
-import { Global } from 'munster';
+import { Global } from 'munster-modules';
 import Router from 'munster-router';
 import SampleComponent from './SampleComponent';
 import ChildRoute from './ChildRoute';

@@ -20,7 +20,7 @@ Components can be registered in the global instance by passing the component to 
 Here's an example on how to register a component in the global instance:
 
 ```javascript
-import { Global } from 'munster';
+import { Global } from 'munster-modules';
 import SampleComponent from './SampleComponent';
 
 new Global({
@@ -49,7 +49,7 @@ Plugins can be registered in the global instance by passing the plugin to the `p
 Here's an example on how to use a plugin:
 
 ```javascript
-import { Global } from 'munster';
+import { Global } from 'munster-modules';
 import Store from 'munster-store';
 import Root from './Root';
 

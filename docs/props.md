@@ -24,7 +24,7 @@ Props plugin needs to be registered in a module before we can use it.
 Here's an example on how to register this plugin:
 
 ```javascript
-import { Global } from 'munster';
+import { Global } from 'munster-modules';
 import Props from 'munster-props';
 
 new Global({

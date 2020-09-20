@@ -59,7 +59,7 @@ export default class SampleComponent {
 #### Register component as global
 
 ```javascript
-import { Global } from 'munster';
+import { Global } from 'munster-modules';
 import SampleComponent from './SampleComponent';
 
 new Global({
@@ -68,10 +68,11 @@ new Global({
     ]
 });
 ```
+<!--
 #### Register component in a module
 
 ```javascript
-import { Module } from 'munster';
+import { Module } from 'munster-modules';
 import SampleComponent from './SampleComponent';
 
 new Module({
@@ -80,6 +81,7 @@ new Module({
     ]
 });
 ```
+-->
 
 #### Normally define a component
 
@@ -389,7 +391,7 @@ Directive needs to be registered in the module before we can use it.
 Here's an example on how to register a directive:
 
 ```javascript
-import { Module } from 'munster';
+import { Module } from 'munster-modules';
 import Color from './Color.directive';
 
 const module = new Module({
