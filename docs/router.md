@@ -38,6 +38,46 @@ new Global({
 });
 ```
 
+## Router property
+
+After router is registered in the global module, a `$router` property is added to all the component registered in the global module.
+
+#### Navigate
+
+Router contains a navigate feature the same as the `Navigate` plugin using `this.$router.navigate(<url>)`.
+
+#### Events
+
+Router gives us an ability to watch for a router events.
+
+Here are the list of available events:
+
+| Events        |  |
+| ---           | --- |
+| onRouteChange | Triggers when the routes is changed. Watchers are automatically un-watched when the component is destroyed. |
+
+Here's an example on how to watch for an event:
+
+```javascript
+<template>
+    ...
+</template>
+
+export default class Root {
+    connectedCallback() {
+        this.$router.events.onRouteChange.watch(params => this.routeChangeEvent(params));
+    }
+
+    routeChangeEvent(params) {
+        console.log(params);
+    }
+}
+```
+
+#### Router params
+
+We can also get the router parameters using `this.$router.params`.
+
 ## Creating routes
 
 A route is just a javascript object that contains two required properties, `path` and `component` and some optional properties.
