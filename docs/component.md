@@ -286,18 +286,17 @@ export default class SampleComponent {
 Child component must be registered as a global component or as a module component.
 :::
 
-## Props
+## Attributes
 
-Props are properties passed down from the parent component to child component.
+Attributes are values passed down from parent component to child component.
+Attribute can only hold a value and not objects or arrays.
 
-Here's an example on how to pass a property from parent to child component:
+Here's an example on how to pass a value from parent to child component:
 
 ##### Parent component
 ```javascript
-// ./SampleComponent.js
-
 <template>
-    <child-component sample-props={this.number}></child-component>
+    <child-component sample-attribute={this.number}></child-component>
 </template>
 
 export default class SampleComponent {
@@ -309,17 +308,16 @@ export default class SampleComponent {
 
 ##### Child component
 ```javascript
-// ./ChildComponent.js
 <template>
     ...
 </template>
 
 export default class ChildComponent {
     static get observedAttributes() {
-        return ['sample-props'];
+        return ['sample-attribute'];
     }
 
-    $attributeChanged(attrName, oldVal, newVal) {
+    attributeChangedCallback(attrName, oldVal, newVal) {
         console.log(attrName);
         console.log(oldVal);
         console.log(newVal);
@@ -329,6 +327,19 @@ export default class ChildComponent {
 
 :::note
 `observedAttributes` is required if we want to watch for the changes of an attribute.
+:::
+
+## Props
+
+Props are the properties passed down from parent to child.
+Props is different from attributes since it can hold values, arrays or objects.
+
+Since props is not directly available in web components we need to use a plugin to use this feature.
+
+Please see the [props plugin document](/docs/component) on how to use props.
+
+:::note
+Passing data using attribute is recommended since attribute is using the implementation of web component attributes.
 :::
 
 <!--
@@ -466,8 +477,6 @@ Here's an example on how to use slots:
 ##### Parent component
 
 ```javascript
-// ./ParentComponent.js
-
 <template>
     <div>
         <child-component>
@@ -482,8 +491,6 @@ export default class ParentComponent {}
 ##### Child component
 
 ```javascript
-// ./ChildComponent.js
-
 <template>
     <slot></slot>
 </template>
@@ -503,8 +510,6 @@ Here's an example on how to use named slots:
 ##### Parent component
 
 ```javascript
-// ./ParentComponent.js
-
 <template>
     <div>
         <child-component>
@@ -520,8 +525,6 @@ export default class ParentComponent {}
 ##### Child component
 
 ```javascript
-// ./ChildComponent.js
-
 <template>
     <div>
         <div>

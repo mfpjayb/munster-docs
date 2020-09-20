@@ -1,23 +1,29 @@
 module.exports = {
   someSidebar: {
-    GettingStarted: [
+    'Getting Started': [
       'index.md',
       'quick-start.md',
     ],
-    MainConcept: [
+    'Main Concept': [
       'global.md',
-      'component.md',
-      'router.md',
-      'store.md'
+      'component.md'
     ],
-    AvailablePlugins: [
+    'Available Plugins': [
       'navigate.md',
+      'props.md',
       'router.md',
-      'store.md'
+      'store.md',
     ],
     CLI: [
       'cli-installation.md',
       'cli-commands.md'
+    ],
+    'Munster in Other Apps': [
+      'munster-in-angular.md',
+      'munster-in-vue.md',
+      'munster-in-react.md',
+      'munster-in-vanilla-javascript.md',
+      'munster-in-web-sites.md'
     ]
   },
 };
