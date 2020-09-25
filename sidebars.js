@@ -19,6 +19,9 @@ module.exports = {
       'cli-installation.md',
       'cli-commands.md'
     ],
+    Tooling: [
+      'testing.md'
+    ],
     'Munster in Other Apps': [
       'munster-in-angular.md',
       'munster-in-vue.md',

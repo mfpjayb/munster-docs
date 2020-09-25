@@ -35,10 +35,11 @@ export default class SampleComponent {
 
 #### Component in global instance
 
-Component selector is based on the class name of the component converted into kebab case with a prefix of `app-` if the component is registered in the global instance.
-If the class name of a component is `SampleComponent` the selector will be `app-sample-component` and now we can mount the component to the dom using `<app-sample-component />` tag.
+Component selector is based on the class name of the component converted into kebab case with a prefix of `app-` if the component is registered in a module.
+If the class name of a component is `SampleComponent` the selector will be `app-sample-component`.
+We can mount the component to the dom using `<app-sample-component />` tag.
 
-Selector can also be customized inside the component using the `$selector` property.
+Selector can also be customized inside the component using the static property `$selector`.
 
 Here's an example on how to add customize the component's selector:
 
@@ -48,9 +49,7 @@ Here's an example on how to add customize the component's selector:
 </template>
 
 export default class SampleComponent {
-    constructor() {
-        this.$selector = 'custom-selector';
-    }
+    static $selector = 'custom-selector';
 }
 ```
 
