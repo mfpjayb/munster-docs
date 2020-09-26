@@ -10,7 +10,6 @@ Here is a list of available commands for munster cli:
 | Command | Syntax | Description |
 | --- | --- | --- |
 | new | `mun new <project_name>` | Generate a new munster application. |
-| serve | `mun serve` | Serve the application locally for development. |
 | generate| `mun generate <type> <name>` | Generate a munster file based on the given type and name. See [generate types](/docs/cli-commands#generate-types) section for more info. |
 
 ## Generate types
