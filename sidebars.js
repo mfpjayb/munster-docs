@@ -24,7 +24,8 @@ module.exports = {
       'munster-in-web-sites.md'
     ],
     Tooling: [
-      'testing.md'
+      'testing.md',
+      'munster-tester.md'
     ],
     CLI: [
       'cli-installation.md',

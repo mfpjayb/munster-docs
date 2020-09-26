@@ -29,6 +29,11 @@ a {
   font-weight: 300;
 }
 
+.markdown li {
+  font-size: 14px;
+  font-weight: 300;
+}
+
 .menu__link:hover {
   text-decoration: underline;
 }
