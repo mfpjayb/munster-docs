@@ -16,19 +16,23 @@ module.exports = {
       'router.md',
       'store.md',
     ],
-    CLI: [
-      'cli-installation.md',
-      'cli-commands.md'
-    ],
-    Tooling: [
-      'testing.md'
-    ],
     'Munster in Other Apps': [
       'munster-in-angular.md',
       'munster-in-vue.md',
       'munster-in-react.md',
       'munster-in-vanilla-javascript.md',
       'munster-in-web-sites.md'
+    ],
+    Tooling: [
+      'testing.md'
+    ],
+    CLI: [
+      'cli-installation.md',
+      'cli-commands.md'
+    ],
+    Advance: [
+      'plugin-development.md',
+      'namespace-development.md'
     ]
   },
 };
