@@ -69,6 +69,48 @@ export class class Child {
     }
 }
 ```
+
+## Pass props from logic
+
+This feature allows us to pass props from parent component to child.
+This is very helpful when building munster components intended to be compatible with other javascript frameworks.
+
+Here's an example on how to pass props from logic:
+
+#### Parent component
+
+```javascript
+<template>
+    <div>
+        <button on:click={this.setProps}>Set Props Button</button>
+        <app-child view:ref={this.childComponent}></app-child>
+    </div>
+</template>
+export default class Parent {
+    constructor() {
+        this.childComponent = null;  // reference to child component
+    }
+    setProps() {
+        this.childComponent.$setProps({
+            date: new Date()
+        });
+    }
+}
+```
+
+#### Child component
+
+```javascript
+<template>
+    ...
+</template>
+export default class Child {
+    onPropsChange(oldProps) {
+        console.log(this.$props);
+    }
+}
+```
+
 ## Hook
 
 After this plugin is registered, the plugin will add an `onPropsChange(oldProp)` hook to the component which will trigger once a property in the parent is changed.
