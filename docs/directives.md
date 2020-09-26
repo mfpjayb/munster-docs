@@ -24,7 +24,7 @@ export default class SampleComponent {
 }
 ```
 
-#### List item name
+## List item name
 
 `view:for-item` | `v:for-item`
 
@@ -53,7 +53,7 @@ The example code above will generate list of element that looks like the followi
 <p>bazz</p>
 ```
 
-#### List index
+## List index
 
 `view:for-index` | `v:for-index`
 
@@ -166,4 +166,4 @@ Here is a list of available events from [w3schools.com](https://www.w3schools.co
 
 `on-prevent:<event name\>`
 
-`on-prevent` namespace is the same as `on` namespace but it stops the default action of an element from happening using `event.preventDefault()`.
+This namespace is the same as `on` namespace but it stops the default action of an element from happening using `event.preventDefault()`.
