@@ -6,30 +6,94 @@ slug: /component
 ---
 
 Components are the most basic building block of an application.
-Currently it is composed of view and logic but in the future releases a scoped style will be added to component's features.
+A component is composed of view, logic and styles.
+In this framework, you have an option to put the view, logic and styles in a single file or in a separate .html, .js and .css files.
 
 :::note
-Component must use `export default` in exporting the component.
+If using a single file component. The component class must use `export default` in exporting the component.
 :::
 
 ## Structure
 
-Component is composed of view and logic.
-Inside the `<template></template>` tag is the view of the component.
-The template tag must have a single child only or it will not work property.
+### Single file component
 
-Below the `<template>` tags is the component's logic.
-Here we can find the class that manipulates the view and the state of the component.
+Here's an example of a single file component.
 
-```javascript
+```html
 <template>
-    ... // Template
+    ... <!-- view -->
 </template>
 
-export default class SampleComponent {
-    ... // Logic
+<script>
+    ... // logic
+</script>
+
+<style>
+    ... /* style */
+</style>
+```
+
+Inside the `<template> </template>` tag is the view of the component.
+The template tag must have a single child only or it will not work property.
+
+Below the template tags is the `<script> </script>` tag that contains the component's logic.
+Here we can find the class that manipulates the view and the state of the component.
+This tag is completely optional. We don't have to put a script tag if no logic is needed for the component.
+The component class must use `export default` in exporting the component or it will not work.
+
+```javascript
+<script>
+    export default class SampleComponent {
+        ... // Logic
+    }
+</script>
+```
+
+The `<style> </style>` contains the styles of the component. Same as the script tag, this tag is also optional.
+
+### Multiple file component
+
+The view, logic and styles of a component can also be separated into different files.
+View can have `.html`, logic can have `.js` and styles can have `.css` extension.
+
+Here's an example on how to make a multiple file component:
+
+#### View
+```html
+<!-- ./sample.component.html -->
+<template>
+    <h1>Sample Component</h1>
+</template>
+```
+
+All html element in view must be inside the template tag and template tag must have a single child only.
+
+#### Style
+```css
+/* ./sample.component.css */
+h1 {
+    color: red;
 }
 ```
+
+#### Logic
+```javascript
+// ./sample.component.js
+
+import { Component } from 'munster';
+import Template from './sample.component.html';
+import Style from './sample.component.css';
+
+@Component({
+  template: Template,
+  style: Style
+})
+export class SampleComponent {
+    ...
+}
+```
+
+Please take note of the `@Component` decorator. The template and style must be imported and passed to the @Component decorator.
 
 ## Component selector
 

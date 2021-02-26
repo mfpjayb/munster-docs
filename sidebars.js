@@ -6,7 +6,6 @@ module.exports = {
     ],
     'Main Concept': [
       'module.md',
-      'global.md',
       'component.md',
       'change-detection.md',
       'directives.md'
