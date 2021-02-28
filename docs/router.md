@@ -8,14 +8,6 @@ slug: /router
 Router is a plugin that enables developers to build a single page application with multiple components that acts as different views of the app.
 View changes depending on the activated route. Activated routes depends on the url of the browser and the path registered in the router.
 
-## Installation
-
-Router plugin can be installed using the following command:
-
-```bash
-npm install munster-router
-```
-
 ## Register the plugin
 
 Router must be registered as a plugin first before we can use it.
@@ -23,24 +15,18 @@ Router must be registered as a plugin first before we can use it.
 Here's an example on how to register the router:
 
 ```javascript
-import { Global } from 'munster-modules';
-import Router from 'munster-router';
-import SampleComponent from './SampleComponent';
+import { Module, Router } from 'munster';
 
-const routes = [
-    { path: '/sample-route', component: SampleComponent }
-];
-
-new Global({
-    plugins: [
-        Router.routes(routes)
-    ]
-});
+export class RootModule extends Module {
+    plugins = [
+        Router.routes([])
+    ];
+}
 ```
 
 ## Router property
 
-After router is registered in the global module, a `$router` property is added to all the component registered in the global module.
+After router is registered in a module, a `$router` property is added to all the component registered in the module.
 
 #### Navigate
 
