@@ -7,8 +7,10 @@ module.exports = {
     'Main Concept': [
       'module.md',
       'component.md',
+      'shadow-dom.md',
       'change-detection.md',
-      'directives.md'
+      'directives.md',
+      'custom-directive.md'
     ],
     'Available Plugins': [
       'navigate.md',

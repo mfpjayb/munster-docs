@@ -17,11 +17,11 @@ Here's an example on how to use list rendering:
 <template>
     <p view:for={this.array}>Hello World!</p>
 </template>
-export default class SampleComponent {
-    constructor() {
-        this.array = [1, 2, 3];
+<script>
+    export default class SampleComponent {
+        array = [1, 2, 3];
     }
-}
+</script>
 ```
 
 ## List item name
@@ -29,7 +29,7 @@ export default class SampleComponent {
 `view:for-item` | `v:for-item`
 
 It allows developers to set the variable name of the list item and display it in view.
-If no list item directive is provided it is `$item` by default.
+If no list item directive is provided, it is `$item` by default.
 
 Here's an example on how to use list item directive:
 
@@ -38,14 +38,14 @@ Here's an example on how to use list item directive:
     <p view:for={this.array} view:for-item="listItem">{listItem}</p>
 </template>
 
-export default class SampleComponent {
-    constructor() {
-        this.array = ['foo', 'bar', 'bazz'];
+<script>
+    export default class SampleComponent {
+        array = ['foo', 'bar', 'bazz'];
     }
-}
+</script>
 ```
 
-The example code above will generate list of element that looks like the following.
+The example code above will generate a list of elements that looks like the following.
 
 ```html
 <p>foo</p>
@@ -58,18 +58,18 @@ The example code above will generate list of element that looks like the followi
 `view:for-index` | `v:for-index`
 
 It allows developers to set the variable name of the list index.
-If no list index directive is provided it is `$index` by default.
+If no list index directive is provided, it is `$index` by default.
 
 ```javascript
 <template>
     <p view:for={this.array} view:for-index="listIndex">{listIndex}</p>
 </template>
 
-export default class SampleComponent {
-    constructor() {
-        this.array = ['foo', 'bar', 'bazz'];
+<script>
+    export default class SampleComponent {
+        array = ['foo', 'bar', 'bazz'];
     }
-}
+</script>
 ```
 
 The example code above will generate list of element that looks like the following.
@@ -94,11 +94,11 @@ Here's an example on how to use conditional rendering:
     <h1 view:if={this.toggle}></h1>
 </template>
 
-export default class SampleComponent {
-    constructor() {
-        this.toggle = true;
+<script>
+    export default class SampleComponent {
+        toggle = true;
     }
-}
+</script>
 ```
 
 ## Reference an element
@@ -111,14 +111,22 @@ Here's an example on how to use this directive:
 
 ```javascript
 <template>
-    <button view:ref={this.elementReference}>Click Me</button>
+    <p view:ref={this.reference}>Hello World</p>
 </template>
-export default class SampleComponent {
-    constructor() {
-        this.elementReference = null;
+
+<script>
+    export default class SampleComponent {
+        this.reference = null;
+        $afterViewInit() {
+            console.log(this.reference);
+        }
     }
-}
+</script>
 ```
+
+The `this.reference` property should now contain a reference to the `p` element in the view when `$afterViewInit` hook runs.
+
+
 ## Model binding
 
 `view:model`
@@ -133,11 +141,11 @@ Here's an example on how to bind a model to the view:
     <input view:model={this.sampleModel} type="text" />
 </template>
 
-export default class SampleComponent {
-    constructor() {
-        this.sampleModel = '';
+<script>
+    export default class SampleComponent {
+        sampleModel = '';
     }
-}
+</script>
 ```
 
 ## Event binding
@@ -153,11 +161,13 @@ Here's an example on how to attach a click event to a button:
     <button on:click={this.clickMe}>Click Me</button>
 </template>
 
-export default class SampleComponent {
-    clickMe() {
-        console.log('I was clicked');
+<script>
+    export default class SampleComponent {
+        clickMe() {
+            console.log('I was clicked');
+        }
     }
-}
+</script>
 ```
 
 Here is a list of available events from [w3schools.com](https://www.w3schools.com/jsref/dom_obj_event.asp).

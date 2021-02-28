@@ -5,43 +5,17 @@ sidebar_label: Change detection
 slug: /change-detection
 ---
 
-Change detection in munster is triggered when a method in a component is called and not when setting a value to a variable.
-Some callbacks like `then()` in http request needs to call a method or the `this.$apply()` to trigger change detection.
-Calling multiple methods at once will only trigger change detection once.
+Change detection in munster is when a value of a class property is changed.
+Property that starts with `$` sign will not trigger the change detection function.
+Setting multiple class properties in a loop will only trigger the change detection once.
 
-## Change detection in callbacks
+:::note
+Property that starts with `$` sign will not trigger the change detection function.
+:::
 
-Here's an example on how to trigger change detection in callback:
+## Manually trigger change detection
 
-```javascript
-export default class Root {
-    connectedCallback() {
-        this.data = null;
-        fetch('/url').then(this.changeDetection.bind(this));
-    }
+In some cases, you may need to manually trigger change detection of a component.
 
-    changeDetection(response) {
-        this.data = response.json();
-    }
-}
-```
-
-Using this technique can potentially result to a cleaner code.
-
-#### Using the apply method.
-
-Another way to trigger change detection inside a callback is to call the `this.$apply()` method.
-
-Here's an example on how to use the `this.$apply()` method.
-
-```javascript
-export default class Root {
-    connectedCallback() {
-        this.data = null;
-        fetch('/url').then(response => {
-            this.data = response.json();
-            this.$apply();
-        });
-    }
-}
-```
+To manually call change detection we can call the `this.$apply()` method of a component.
+Calling this method in a loop will only trigger the change detection once.
