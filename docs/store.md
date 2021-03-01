@@ -8,14 +8,6 @@ slug: /store
 Store is a plugin and a state management built for munster framework.
 It is accessible inside a component using `this.$store`.
 
-## Installation
-
-Store plugin can be installed using the following command:
-
-```bash
-npm install munster-store
-```
-
 ## Register the plugin
 
 Store needs to be registered in a module before we can use it.
@@ -23,14 +15,13 @@ Store needs to be registered in a module before we can use it.
 Here's an example on how to register the store:
 
 ```javascript
-import { Global } from 'munster-modules';
-import Store from 'munster-store';
+import { Module, Store } from 'munster';
 
-new Global({
-    plugins: [
+export class RootModule extends Module {
+    plugins = [
         Store.config({})
-    ]
-});
+    ];
+}
 ```
 
 ## Initial state
@@ -40,20 +31,19 @@ Initial state of the store is the state that is passed to the store as the initi
 Here's an example on how to create an initial state:
 
 ```javascript
-import { Global } from 'munster-modules';
-import Store from 'munster-store';
+import { Module, Store } from 'munster';
 
-const store = {
+const initialState = {
     state: {
         random: 0
     }
 };
 
-new Global({
-    plugins: [
-        Store.config(store)
-    ]
-});
+export class RootModule extends Module {
+    plugins = [
+        Store.config(initialState)
+    ];
+}
 ```
 
 ## Setter
@@ -67,16 +57,18 @@ Here's an example on how to set a state inside a component:
     ...
 </template>
 
-export default class SampleComponent {
-    btnClick() {
-        this.$store.random = Math.random();
+<script>
+    export default class SampleComponent {
+        btnClick() {
+            this.$store.random = Math.random();
+        }
     }
-}
+</script>
 ```
 
 ## Getter
 
-Accessing a value of a store, the developer needs to call the `value()` in order to get the current value of the state.
+Accessing a value of a store, the developer needs to call the `value` in order to get the current value of the state.
 
 Here's an example on how to get a value of the store:
 
@@ -85,11 +77,13 @@ Here's an example on how to get a value of the store:
     ...
 </template>
 
-export default class SampleComponent {
-    connectedCallback() {
-        this.random = this.$store.random.value();
+<script>
+    export default class SampleComponent {
+        $connected() {
+            this.random = this.$store.random.value;
+        }
     }
-}
+</script>
 ```
 
 ## Watchers
@@ -103,15 +97,15 @@ Here's how to watch the data changes for each item in the state:
     ...
 </template>
 
-export default class SampleComponent {
-    connectedCallback() {
-        this.$store.random.watch(this.onRandomChanges.bind(this));
+<script>
+    export default class SampleComponent {
+        $connected() {
+            this.$store.random.watch(value => {
+                console.log(value);
+            });
+        }
     }
-
-    onRandomChanges(random) {
-        this.random = random;
-    }
-}
+</script>
 ```
 
 :::note
@@ -127,10 +121,9 @@ Actions can also be used to update the state.
 Here's an example on how to create an action:
 
 ```javascript
-import { Global } from 'munster-modules';
-import Store from 'munster-store';
+import { Module, Store } from 'munster';
 
-const store = {
+const initialState = {
     state: {
         random: 0
     },
@@ -143,20 +136,25 @@ const store = {
     }
 };
 
-new Global({
-    plugins: [
-        Store.config(state)
-    ]
-});
+export class RootModule extends Module {
+    plugins = [
+        Store.config(initialState)
+    ];
+}
 ```
 #### Dispatch an action
 
 Here's an example on how to dispatch the created action above:
 
 ```javascript
-export default class SampleComponent {
-    btnClick() {
-        this.$store.random.dispatch('setRandom', Math.random());
+<template>
+    ...
+</template>
+<script>
+    export default class SampleComponent {
+        btnClick() {
+            this.$store.random.dispatch('setRandom', Math.random());
+        }
     }
-}
+</script>
 ```

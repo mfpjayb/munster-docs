@@ -40,8 +40,6 @@ Here's an example on how to use slots:
         </app-child-component>
     </div>
 </template>
-
-export default class ParentComponent {}
 ```
 
 ##### Child component
@@ -50,8 +48,6 @@ export default class ParentComponent {}
 <template>
     <slot></slot>
 </template>
-
-export default class ChildComponent {}
 ```
 In the example above,
 the `<h1>I will be displayed on the child component slot.</h1>` element which is inside the `<app-child-component>...</app-child-component>`

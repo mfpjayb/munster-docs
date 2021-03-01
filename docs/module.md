@@ -118,3 +118,21 @@ export class RootModule extends Module {
 ```
 
 To declare a module, we just pass the module to the modules array in a module.
+Components from submodules are automatically available in components registered in the parent module.
+
+## Export plugins
+
+Plugins in submodule needs to be exported from submodule if we want it to be available in components registered in the parent module.
+
+Here's an example on how to export a plugin:
+
+```javascript
+import { Module } from 'munster';
+import { SamplePlugin } from './sample.plugin';
+
+export class RootModule extends Module {
+    exportPlugins = [
+        SamplePlugin
+    ];
+}
+```

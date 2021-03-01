@@ -193,6 +193,27 @@ Here is an example on how to display a text from logic to view:
 </script>
 ```
 
+## Model binding
+
+`view:model`
+
+Model binding is a two way binding of data.
+Every time the model is changed from the view, the value in logic will be updated and the same thing will happen in the view when the model is updated from the logic.
+
+Here's an example on how to bind a model to the view:
+
+```javascript
+<template>
+    <input view:model={this.sampleModel} type="text" />
+</template>
+
+<script>
+    export default class SampleComponent {
+        sampleModel = '';
+    }
+</script>
+```
+
 ## Hooks
 
 Hooks are functions that lets you run a block of codes when your component triggers a lifecycle event.

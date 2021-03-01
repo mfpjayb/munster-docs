@@ -24,6 +24,8 @@ export class RootModule extends Module {
 }
 ```
 
+The static method `routes` accepts an array of routes.
+
 ## Router property
 
 After router is registered in a module, a `$router` property is added to all the component registered in the module.
@@ -44,25 +46,25 @@ Here are the list of available events:
 
 Here's an example on how to watch for an event:
 
-```javascript
+```html
 <template>
     ...
 </template>
 
-export default class Root {
-    connectedCallback() {
-        this.$router.events.onRouteChange.watch(params => this.routeChangeEvent(params));
+<script>
+    export default class RootComponent {
+        $connected() {
+            this.$router.events.onRouteChange.watch(params => {
+                console.log(params);
+            });
+        }
     }
-
-    routeChangeEvent(params) {
-        console.log(params);
-    }
-}
+</script>
 ```
 
 #### Router params
 
-We can also get the router parameters using `this.$router.params`.
+We can also get the router parameters using `this.$router.params()`.
 
 ## Creating routes
 
@@ -75,19 +77,18 @@ A route is just a javascript object that contains two required properties, `path
 | exact         | Boolean   | If the values is true, then the Component will only activate if route path is an exact match with the browser url pathname but still respect the dynamic route matching. |
 | middleware    | Array     | It is another layer of checking if the component can activate or not. |
 | children      | Array     | An Array of child routes. |
+| module        | import    | Load modules on demand. |
 
 Here's an example on how to create routes
 
 ```javascript
-import { Global } from 'munster-modules';
-import Router from 'munster-router';
-import SampleComponent from './SampleComponent';
-import ChildRoute from './ChildRoute';
+import SampleComponent from './sample.component.html';
+import ChildComponent from './child.component.html';
 
 const routes = [
     {
         path: '/route', component: SampleComponent, children: [
-            { path: '/route/child', component: ChildRoute }
+            { path: '/route/child', component: ChildComponent }
         ]
     }
 ];
@@ -148,26 +149,47 @@ It can also run a block of codes before a route event happen.
 Here's an example on how to use middleware:
 
 ```javascript
-// ./AppModule.js
-...
-import SampleMiddleware from './SampleMiddleware';
+import { SampleMiddleware } from './sample.middleware';
 const routes = [
     {
         path: '/sample-route', component: SampleComponent,
         middleware: [SampleMiddleware]
     }
 ];
-...
 ```
 
 ```javascript
-// ./SampleMiddleware.js
-export default class SampleMiddleware {
+export class SampleMiddleware {
     canActivate() {
-        ...
+        // return true or false
     }
 }
 ```
 
 If `canActivate` method returns true, then the component is allowed to activate and not allowed if otherwise.
 
+## Lazy loading
+
+To lazy load components or load components on demand, we can use the `module` property of a route.
+First we need to create a module then declare the components inside the module and pass the module to the route.
+
+Here's an example on how to use lazy loading in router plugin:
+
+```javascript
+const routes = [
+    {
+        path: '/sample-route',
+        module: import('./sample.module').then(mod => mod.SampleModule)
+    }
+];
+```
+
+```javascript
+// ./sample.module.js
+import { Module } from 'munster';
+import SampleComponent from './sample.component';
+
+export class SampleModule extends Module {
+    rootComponent = SampleComponent;
+}
+```
