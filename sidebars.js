@@ -29,10 +29,10 @@ module.exports = {
     //   'testing.md',
     //   'munster-tester.md'
     // ],
-    // CLI: [
-    //   'cli-installation.md',
-    //   'cli-commands.md'
-    // ],
+    CLI: [
+      'cli-installation.md',
+      'cli-commands.md'
+    ],
     Advance: [
       // 'plugin-development.md',
       'custom-directive.md',
